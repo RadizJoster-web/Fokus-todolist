@@ -1,0 +1,295 @@
+.todo-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start; /* flex-start agar pas saat edit mode memanjang */
+  gap: var(--space-3);
+  background: var(--glass-surface);
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+  overflow: hidden;
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
+}
+
+.todo-item:hover {
+  background: var(--glass-hover);
+  border-color: var(--accent-soft);
+  transform: translateX(2px);
+}
+
+.todo-item__accent-bar {
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+  background: var(--accent);
+  opacity: 0.6;
+  transition: background var(--transition);
+}
+
+.todo-item--overdue .todo-item__accent-bar {
+  background: var(--danger);
+  opacity: 0.85;
+}
+
+.todo-item--done {
+  opacity: 0.5;
+}
+
+.todo-item--done:hover {
+  opacity: 0.65;
+  transform: none;
+}
+
+.todo-item__check {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--glass-border-strong);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  margin-top: 2px; /* align dengan teks */
+  transition: all var(--transition);
+}
+
+.todo-item__check:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.todo-item__check:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.todo-item__check--done {
+  background: var(--gradient-primary);
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px var(--blue-glow);
+}
+
+.todo-item__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.todo-item__text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 450;
+  color: var(--text-primary);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.todo-item--done .todo-item__text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.todo-item__desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  overflow: hidden;
+  word-break: break-word;
+  padding-left: 1px;
+}
+
+.todo-item--done .todo-item__desc {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* ── Edit mode ── */
+.todo-item__edit-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  position: relative;
+}
+
+.todo-item__edit-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--accent);
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  width: 100%;
+  padding: 2px 6px;
+}
+
+.todo-item__edit-textarea {
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: var(--radius-lg);
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  resize: none;
+  line-height: 1.5;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.todo-item__edit-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.todo-item__edit-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.todo-item__edit-count {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: -4px;
+}
+
+/* ── Meta row ── */
+.todo-item__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-top: var(--space-1);
+}
+
+.todo-item__date {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.todo-item__due {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  padding: 1px 7px;
+  letter-spacing: 0.02em;
+}
+
+.todo-item__due--normal {
+  color: var(--text-muted);
+  background: var(--glass-active);
+  border: 1px solid var(--glass-border);
+}
+.todo-item__due--soon {
+  color: var(--priority-medium, #f59e0b);
+  background: color-mix(in srgb, #f59e0b 12%, transparent);
+  border: 1px solid color-mix(in srgb, #f59e0b 30%, transparent);
+}
+.todo-item__due--today {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid var(--accent-soft);
+}
+.todo-item__due--overdue {
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+}
+
+.todo-item__desc-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--glass-active);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  padding: 1px 6px 1px 7px;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition);
+  line-height: 1.6;
+}
+
+.todo-item__desc-toggle:hover {
+  background: var(--glass-hover);
+  color: var(--accent);
+  border-color: var(--accent-soft);
+}
+
+.todo-item__desc-toggle--open {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  border-color: var(--accent-soft);
+}
+
+/* ── Action buttons ── */
+.todo-item__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  opacity: 0;
+  transition: opacity var(--transition);
+  flex-shrink: 0;
+}
+
+.todo-item:hover .todo-item__actions,
+.todo-item:focus-within .todo-item__actions {
+  opacity: 1;
+}
+
+.todo-item__btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-lg);
+  border: none;
+  background: var(--glass-hover);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all var(--transition);
+}
+
+.todo-item__btn:hover {
+  background: var(--glass-active);
+  color: var(--text-primary);
+}
+
+.todo-item__btn--delete:hover {
+  background: color-mix(in srgb, var(--danger) 15%, transparent);
+  color: var(--danger);
+}
+
+.todo-item__btn--save:hover {
+  background: color-mix(in srgb, var(--success) 15%, transparent);
+  color: var(--success);
+}

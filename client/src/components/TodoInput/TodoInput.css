@@ -1,0 +1,228 @@
+.todo-input {
+  margin-bottom: var(--space-4);
+}
+
+.todo-input__row {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.todo-input__field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: var(--radius-xl);
+  padding: 0 var(--space-2) 0 var(--space-4);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+  gap: var(--space-1);
+}
+
+.todo-input__field:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.todo-input__text {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  padding: var(--space-3) 0;
+  min-width: 0;
+}
+
+.todo-input__text:focus {
+  outline: none;
+  border: none;
+}
+
+.todo-input__text::placeholder {
+  color: var(--text-muted);
+}
+
+.todo-input__priority-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  transition:
+    background var(--transition),
+    transform var(--transition);
+  display: flex;
+  align-items: center;
+}
+
+.todo-input__priority-btn:hover {
+  background: var(--glass-hover);
+  transform: scale(1.1);
+}
+
+/* ---- Description Toggle Checkbox ---- */
+.desc-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  cursor: pointer;
+  user-select: none;
+  width: fit-content;
+}
+
+.desc-toggle__checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.desc-toggle__box {
+  width: 17px;
+  height: 17px;
+  border-radius: 5px;
+  border: 1.5px solid var(--glass-border-strong);
+  background: var(--input-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition:
+    border-color var(--transition),
+    background var(--transition),
+    box-shadow var(--transition);
+}
+
+.desc-toggle:hover .desc-toggle__box {
+  border-color: var(--accent);
+}
+
+.desc-toggle__checkbox:checked ~ .desc-toggle__box,
+.desc-toggle:has(.desc-toggle__checkbox:checked) .desc-toggle__box {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.desc-toggle__check {
+  font-size: 0.65rem;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.desc-toggle__icon {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.desc-toggle:hover .desc-toggle__icon {
+  color: var(--accent);
+}
+
+.desc-toggle__label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.desc-toggle:hover .desc-toggle__label {
+  color: var(--text-secondary);
+}
+
+/* ---- Description Textarea ---- */
+.desc-input-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.desc-input {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  resize: none;
+  outline: none;
+  line-height: 1.55;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+  display: block;
+}
+
+.desc-input::placeholder {
+  color: var(--text-muted);
+}
+
+.desc-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.desc-input__count {
+  position: absolute;
+  bottom: var(--space-2);
+  right: var(--space-3);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* ---- Priority Picker ---- */
+.priority-picker {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-1);
+}
+
+.priority-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--glass-surface);
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+}
+
+.priority-option:hover {
+  background: var(--glass-hover);
+  border-color: var(--p-color);
+  color: var(--p-color);
+}
+
+.priority-option--active {
+  background: color-mix(in srgb, var(--p-color) 15%, transparent);
+  border-color: var(--p-color);
+  color: var(--p-color);
+}
+
+.priority-option__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--p-color);
+  flex-shrink: 0;
+}

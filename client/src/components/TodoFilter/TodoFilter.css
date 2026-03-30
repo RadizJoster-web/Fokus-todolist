@@ -1,0 +1,67 @@
+.todo-filter {
+  margin-bottom: var(--space-4);
+}
+
+.todo-filter__tabs {
+  display: flex;
+  background: var(--input-bg);
+  border-radius: var(--radius-xl);
+  padding: var(--space-1);
+  gap: var(--space-1);
+  border: 1.5px solid var(--glass-border);
+}
+
+.todo-filter__tab {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--transition);
+  white-space: nowrap;
+}
+
+.todo-filter__indicator {
+  position: absolute;
+  inset: 0;
+  background: var(--glass-active);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--accent-soft);
+  z-index: 0;
+  box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+.todo-filter__tab--active {
+  color: var(--accent);
+}
+
+.todo-filter__label,
+.todo-filter__badge {
+  position: relative;
+  z-index: 1;
+}
+
+.todo-filter__badge {
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: 0.68rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-1);
+  line-height: 1;
+}
