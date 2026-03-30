@@ -12,16 +12,20 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       output: {
-        // Mengatur format penamaan file agar lebih rapi di folder dist
-        chunkFileNames: "assets/js/[name]-[hash].js",
-        entryFileNames: "assets/js/[name]-[hash].js",
-        assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
-
-        manualChunks: {
-          vendor: ["react", "react-dom"],
-          // Tambahkan lucide-react jika kamu pakai untuk icon di Todo List
-          // ui: ["lucide-react"],
-          animations: ["framer-motion"],
+        // Ubah dari OBJEK { ... } menjadi FUNGSI di bawah ini:
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            // Memisahkan library React core
+            if (id.includes("react") || id.includes("react-dom")) {
+              return "vendor";
+            }
+            // Memisahkan Framer Motion untuk animasi
+            if (id.includes("framer-motion")) {
+              return "animations";
+            }
+            // Sisanya masuk ke chunk 'vendor-others'
+            return "vendor-others";
+          }
         },
       },
     },
